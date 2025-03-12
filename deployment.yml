@@ -5,11 +5,11 @@ metadata:
 spec:
 #  activeDeadlineSeconds: 1800  # Pod terminates after 30 min
   securityContext:
-    runAsUser: 261440 # run id command in terminal to get your UID
+    runAsUser: 503 # run id command in terminal to get your UID
     runAsGroup: 1132
   containers:
-    - name: browsertrix-crawler
-      image: webrecorder/browsertrix-crawler
+    - name: example-container
+      image:  ghcr.io/gangani/kub_temp:main  # image name
       resources:
         requests: # minimum resources
           memory: "16Gi"
