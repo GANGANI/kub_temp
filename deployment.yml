@@ -1,35 +1,30 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: browsertrix-crawler
+  name: news-scraper
 spec:
+#  activeDeadlineSeconds: 1800  # Pod terminates after 30 min
   securityContext:
-    runAsUser: 261440  # Replace with your actual UID
-    runAsGroup: 1132    # Replace with your actual GID
+    runAsUser: 261440 # run id command in terminal to get your UID
+    runAsGroup: 1132
   containers:
-    - name: browsertrix-crawler-container
-      image: webrecorder/browsertrix-crawler:latest  # Use the Browsertrix crawler image
+    - name: example-container
+      image:  ghcr.io/gangani/kub_temp:main  # image name
       resources:
-        requests:
+        requests: # minimum resources
           memory: "16Gi"
           cpu: "8"
-        limits:
+        limits: # maximum resources
           memory: "24Gi"
           cpu: "16"
       volumeMounts:
-        - name: crawl-data
-          mountPath: "/crawls"  # Mount the crawl data directory to /crawls in the container
-        - name: config-dir
-          mountPath: "/app"  # Mount the directory where crawl.yml is located (config)
-      command: ["/bin/bash", "-c", "docker run -v /crawls:/crawls/ webrecorder/browsertrix-crawler crawl --url https://example.com --generateWACZ --text --collection test"]  # Run the Browsertrix crawl command
+      - name: home
+        mountPath: "/app"
+      command: ["/bin/sh"]
       stdin: true
       tty: true
   volumes:
-    - name: crawl-data
-      nfs:
-        server: 128.239.56.166  # Your NFS server
-        path: /sciclone/home/gchewababarand/crawls  # Path for storing crawl data
-    - name: config-dir
-      nfs:
-        server: 128.239.56.166  # Your NFS server
-        path: /sciclone/home/gchewababarand/repos  # Path for storing configuration files like crawl.yml
+  - name: home
+    nfs:
+      server: 128.239.56.166
+      path: /sciclone/home/gchewababarand/repos
