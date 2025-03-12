@@ -5,7 +5,7 @@ metadata:
 spec:
 #  activeDeadlineSeconds: 1800  # Pod terminates after 30 min
   securityContext:
-    runAsUser: 503 # run id command in terminal to get your UID
+    runAsUser: 261440 # run id command in terminal to get your UID
     runAsGroup: 1132
   containers:
     - name: example-container
