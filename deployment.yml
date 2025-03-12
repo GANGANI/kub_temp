@@ -9,7 +9,7 @@ spec:
     runAsGroup: 1132
   containers:
     - name: example-container
-      image: ghcr.io/location/your_image_name:tag  # image name
+      image:  ghcr.io/gangani/kub_temp:main  # image name
       resources:
         requests: # minimum resources
           memory: "16Gi"
